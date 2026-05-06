@@ -10,7 +10,7 @@ import "./pages/decision.css";
 import "./pages/share-situation.css";
 import "./components/decision-cta.css";
 import "./components/related-questions.css";
-import "./styles/homefix-theme.css";
+import "./styles/autobuy-theme.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

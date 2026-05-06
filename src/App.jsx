@@ -12,11 +12,12 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/share-your-situation" element={<ShareSituationPage />} />
+        <Route path="/p/:slug" element={<DecisionPage />} />
 
         <Route path="/:domainSlug" element={<DomainPage />} />
         <Route path="/:domainSlug/:familySlug" element={<ClusterPage />} />
-        <Route path="/p/:slug" element={<DecisionPage />} />
       </Routes>
+
       <Analytics />
     </BrowserRouter>
   );

@@ -7,6 +7,7 @@ import DecisionDisclaimer from "../components/DecisionDisclaimer";
 import DecisionCTA from "../components/DecisionCTA";
 import { supabase } from "../lib/supabase";
 import { mapDecisionPayload } from "../decision/decisionMapper";
+import { getAutoBuyDomainFromBranchKey } from "../lib/domainConfig";
 import DecisionBreadcrumbs from "../decision/DecisionBreadcrumbs";
 import DecisionHero from "../decision/DecisionHero";
 import DecisionBottomLine from "../decision/DecisionBottomLine";
@@ -16,17 +17,37 @@ import DecisionNextStep from "../decision/DecisionNextStep";
 import DecisionException from "../decision/DecisionException";
 import DecisionPageBreak from "../decision/DecisionPageBreak";
 
-const SITE_NAME = "HomeFixScope";
+const SITE_NAME = "AutoBuyScope";
 const SITE_DESCRIPTION =
-  "Repair decisions for leaks, roofs, HVAC, plumbing, electrical, and structural problems.";
+  "Car buying decision guides for used cars, financing, timing, negotiation, reliability, safety, and deal confidence.";
 
 function buildDecisionDescription(page) {
   const text =
     page?.bottomLine ||
     page?.hero?.question ||
-    "Practical repair guidance for timing, risk, DIY-vs-pro choices, replacement decisions, and quote scope.";
+    "Practical car-buying guidance for price, condition, financing, seller risk, timing pressure, inspection concerns, and whether to walk away.";
 
   return text.length > 160 ? `${text.slice(0, 157)}...` : text;
+}
+
+function normalizePayloadRelatedQuestions(items = []) {
+  if (!Array.isArray(items)) return [];
+
+  return items
+    .map((item) => {
+      if (typeof item === "string") {
+        return {
+          title: item,
+          slug: "",
+        };
+      }
+
+      return {
+        title: item?.title || item?.question || "",
+        slug: item?.slug || "",
+      };
+    })
+    .filter((item) => item.title);
 }
 
 export default function DecisionPage() {
@@ -69,6 +90,12 @@ export default function DecisionPage() {
           throw new Error(`Branch seed query failed: ${branchSeedError.message}`);
         }
 
+        const branchKey = branchSeedRow.branch_key || "";
+
+        if (!branchKey.startsWith("autobuy_")) {
+          throw new Error("This page does not belong to AutoBuyScope.");
+        }
+
         const { data: relationshipRows, error: relationshipError } = await supabase
           .from("page_relationships")
           .select("target_page_id, relationship_type, rank")
@@ -82,44 +109,84 @@ export default function DecisionPage() {
         let relatedQuestions = [];
 
         if (relationshipRows?.length) {
-          const targetIds = relationshipRows.map((row) => row.target_page_id);
-
-          const { data: targetPages, error: targetPagesError } = await supabase
-            .from("pages")
-            .select("id, title, slug, page_status")
-            .in("id", targetIds)
-            .eq("page_status", "published");
-
-          if (targetPagesError) {
-            throw new Error(`Related target query failed: ${targetPagesError.message}`);
-          }
-
-          const targetMap = new Map((targetPages ?? []).map((page) => [page.id, page]));
-
-          relatedQuestions = relationshipRows
-            .map((row) => {
-              const target = targetMap.get(row.target_page_id);
-              if (!target) return null;
-
-              return {
-                title: target.title,
-                slug: target.slug,
-              };
-            })
+          const targetIds = relationshipRows
+            .map((row) => row.target_page_id)
             .filter(Boolean);
+
+          if (targetIds.length) {
+            const { data: targetPages, error: targetPagesError } = await supabase
+              .from("pages")
+              .select("id, title, slug, page_status, seed_id")
+              .in("id", targetIds)
+              .eq("page_status", "published");
+
+            if (targetPagesError) {
+              throw new Error(`Related target query failed: ${targetPagesError.message}`);
+            }
+
+            const targetSeedIds = (targetPages ?? [])
+              .map((target) => target.seed_id)
+              .filter(Boolean);
+
+            let allowedTargetSeedIds = new Set();
+
+            if (targetSeedIds.length) {
+              const { data: targetSeedRows, error: targetSeedError } = await supabase
+                .from("branch_seed_overview")
+                .select("seed_id, branch_key")
+                .in("seed_id", targetSeedIds);
+
+              if (targetSeedError) {
+                throw new Error(`Related target seed query failed: ${targetSeedError.message}`);
+              }
+
+              allowedTargetSeedIds = new Set(
+                (targetSeedRows ?? [])
+                  .filter((row) => String(row.branch_key || "").startsWith("autobuy_"))
+                  .map((row) => row.seed_id)
+              );
+            }
+
+            const targetMap = new Map(
+              (targetPages ?? [])
+                .filter((target) => allowedTargetSeedIds.has(target.seed_id))
+                .map((target) => [target.id, target])
+            );
+
+            relatedQuestions = relationshipRows
+              .map((row) => {
+                const target = targetMap.get(row.target_page_id);
+                if (!target?.slug) return null;
+
+                return {
+                  title: target.title,
+                  slug: target.slug,
+                };
+              })
+              .filter(Boolean);
+          }
+        }
+
+        /*
+          Fallback:
+          If page_relationships has not been generated yet, preserve payload
+          related_questions. These may show as non-clickable unless they include slugs.
+        */
+        if (!relatedQuestions.length) {
+          relatedQuestions = normalizePayloadRelatedQuestions(
+            parsedPayload.related_questions ?? []
+          );
         }
 
         const merged = {
           ...parsedPayload,
-          related_questions: relatedQuestions.length
-            ? relatedQuestions
-            : parsedPayload.related_questions ?? [],
+          related_questions: relatedQuestions,
           id: publishedRow.id,
           page_id: publishedRow.id,
           seed_id: publishedRow.seed_id,
           slug: publishedRow.slug,
           title: publishedRow.title ?? parsedPayload.title ?? "",
-          branch_key: branchSeedRow.branch_key,
+          branch_key: branchKey,
           branch_label: branchSeedRow.branch_label,
           question_pattern: branchSeedRow.question_pattern,
           scenario: branchSeedRow.scenario,
@@ -145,7 +212,7 @@ export default function DecisionPage() {
 
   if (loading) {
     return (
-      <main className="page-shell decision-page">
+      <main className="page-shell decision-page autobuy-decision-page">
         <Helmet>
           <title>{`Loading… | ${SITE_NAME}`}</title>
           <meta name="description" content={SITE_DESCRIPTION} />
@@ -153,7 +220,7 @@ export default function DecisionPage() {
 
         <div className="page-width decision-page-width">
           <Header />
-          <p className="section-copy">Loading repair guide…</p>
+          <p className="section-copy">Loading buying guide…</p>
         </div>
       </main>
     );
@@ -161,7 +228,7 @@ export default function DecisionPage() {
 
   if (error || !page) {
     return (
-      <main className="page-shell decision-page">
+      <main className="page-shell decision-page autobuy-decision-page">
         <Helmet>
           <title>{`Page not found | ${SITE_NAME}`}</title>
           <meta name="description" content={SITE_DESCRIPTION} />
@@ -169,17 +236,17 @@ export default function DecisionPage() {
 
         <div className="page-width decision-page-width">
           <Header />
-          <p className="section-copy">Could not load this repair guide.</p>
+          <p className="section-copy">Could not load this buying guide.</p>
           {error ? <p className="section-copy">{error}</p> : null}
         </div>
       </main>
     );
   }
 
-  const vertical = page.branch_key?.split("_")?.[0];
+  const vertical = getAutoBuyDomainFromBranchKey(page.branch_key);
 
   return (
-    <main className="page-shell decision-page">
+    <main className="page-shell decision-page autobuy-decision-page">
       <Helmet>
         <title>{`${page.title} | ${SITE_NAME}`}</title>
         <meta name="description" content={buildDecisionDescription(page)} />

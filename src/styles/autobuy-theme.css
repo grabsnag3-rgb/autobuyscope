@@ -978,7 +978,7 @@ body {
   }
 
   .home-featured .section-rule-label::before {
-    content: "Repair areas";
+    content: "Buying areas";
     color: var(--hfs-orange);
     font-size: 0.86rem;
     font-weight: 900;
@@ -1730,4 +1730,1561 @@ textarea:focus-visible {
 .related-questions__link::before,
 .related-questions__link::after {
   pointer-events: none !important;
+}
+
+/* =========================================================
+   RELATED QUESTIONS CLICK / TAP FIX
+   ========================================================= */
+
+.related-questions,
+.related-questions__list,
+.related-questions__item,
+.related-questions__link {
+  position: relative;
+}
+
+.related-questions__link {
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.related-questions__text,
+.related-questions__arrow {
+  pointer-events: none;
+}
+
+.related-questions__item::before,
+.related-questions__item::after,
+.related-questions__link::before,
+.related-questions__link::after {
+  pointer-events: none !important;
+}
+
+/* =========================================================
+   AUTOBUYSCOPE THEME OVERRIDES
+   Dark buyer-decision console / inspection report feel
+   ========================================================= */
+
+:root {
+  --abs-bg: #081116;
+  --abs-bg-2: #0b151b;
+  --abs-panel: #101a20;
+  --abs-panel-2: #14232b;
+  --abs-panel-3: #172935;
+
+  --abs-text: #f2f8fa;
+  --abs-muted: rgba(242, 248, 250, 0.76);
+  --abs-soft: rgba(242, 248, 250, 0.58);
+  --abs-faint: rgba(242, 248, 250, 0.38);
+
+  --abs-line: rgba(158, 220, 230, 0.16);
+  --abs-line-strong: rgba(158, 220, 230, 0.28);
+
+  --abs-teal: #24d3c2;
+  --abs-teal-2: #62f0e3;
+  --abs-blue: #4aa8ff;
+  --abs-lime: #b7e85f;
+  --abs-red: #ff625c;
+
+  --hfs-orange: var(--abs-teal);
+  --hfs-orange-2: var(--abs-teal-2);
+  --hfs-orange-deep: #109487;
+}
+
+html,
+body {
+  background: var(--abs-bg);
+}
+
+body {
+  color: var(--abs-text);
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+.page-shell {
+  background:
+    radial-gradient(circle at 20% 0%, rgba(36, 211, 194, 0.1), transparent 34rem),
+    radial-gradient(circle at 90% 12%, rgba(74, 168, 255, 0.08), transparent 30rem),
+    linear-gradient(180deg, var(--abs-bg-2), var(--abs-bg));
+  color: var(--abs-text);
+}
+
+/* -------------------------
+   Header / wordmark
+   ------------------------- */
+
+.site-header__home {
+  color: rgba(242, 248, 250, 0.94);
+  letter-spacing: -0.035em;
+}
+
+.site-header__home:hover {
+  color: var(--abs-teal-2);
+}
+
+/* -------------------------
+   Homepage hero
+   ------------------------- */
+
+.home-brand-kicker,
+.section-rule-label,
+.section-label,
+.domain-hero__eyebrow,
+.cluster-hero__eyebrow,
+.decision-hero__eyebrow,
+.decision-bottom-line__eyebrow,
+.related-questions__eyebrow,
+.decision-cta__label,
+.share-situation-form label span {
+  color: var(--abs-teal);
+  text-shadow: 0 0 18px rgba(36, 211, 194, 0.12);
+}
+
+.home-brand-name {
+  color: var(--abs-text);
+  font-weight: 850;
+  letter-spacing: -0.075em;
+}
+
+.home-brand-deck,
+.home-domain-body,
+.section-copy,
+.domain-hero__body,
+.cluster-hero__body {
+  color: var(--abs-muted);
+}
+
+/* Replace construction feel with console/grid feel */
+.home-brand-slab,
+.home-domain-link,
+.share-situation-success,
+.share-situation-form {
+  background:
+    linear-gradient(180deg, rgba(158, 220, 230, 0.055), rgba(158, 220, 230, 0.018)),
+    var(--abs-panel);
+  border-color: var(--abs-line);
+  box-shadow:
+    inset 0 1px 0 rgba(242, 248, 250, 0.04),
+    0 18px 48px rgba(0, 0, 0, 0.22);
+}
+
+/* -------------------------
+   Search
+   ------------------------- */
+
+.home-search__input,
+input[type="search"] {
+  min-height: 62px;
+  border: 2px solid var(--abs-line);
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, rgba(158, 220, 230, 0.04), rgba(158, 220, 230, 0.012)),
+    #071014;
+  color: var(--abs-text);
+  box-shadow:
+    inset 0 1px 0 rgba(242, 248, 250, 0.04),
+    0 14px 34px rgba(0, 0, 0, 0.22);
+}
+
+.home-search__input::placeholder,
+input[type="search"]::placeholder {
+  color: rgba(242, 248, 250, 0.5);
+}
+
+.home-search__input:focus,
+input[type="search"]:focus {
+  border-color: rgba(36, 211, 194, 0.72);
+  box-shadow:
+    0 0 0 3px rgba(36, 211, 194, 0.14),
+    0 14px 34px rgba(0, 0, 0, 0.24);
+}
+
+.home-search__panel {
+  background: #0d171d;
+  border-color: var(--abs-line);
+}
+
+.home-search__link:hover {
+  background: rgba(36, 211, 194, 0.06);
+}
+
+/* -------------------------
+   Cards / rows
+   ------------------------- */
+
+.home-vertical-card,
+.domain-row,
+.cluster-row,
+.decision-guidance__card,
+.decision-changes__row,
+.related-questions__link {
+  background:
+    linear-gradient(180deg, rgba(158, 220, 230, 0.035), rgba(158, 220, 230, 0.012)),
+    var(--abs-panel);
+  border-color: var(--abs-line);
+}
+
+.home-vertical-card:hover,
+.domain-row:hover,
+.cluster-row:hover,
+.related-questions__link:hover {
+  border-color: rgba(36, 211, 194, 0.48);
+  background:
+    linear-gradient(180deg, rgba(36, 211, 194, 0.06), rgba(158, 220, 230, 0.02)),
+    var(--abs-panel-2);
+  box-shadow: 0 0 0 1px rgba(36, 211, 194, 0.12);
+  transform: translateY(-1px);
+}
+
+.home-vertical-card__top span,
+.domain-row__arrow,
+.cluster-row__arrow {
+  color: var(--abs-teal);
+}
+
+.home-vertical-card h3,
+.domain-row__title,
+.cluster-row__title,
+.home-domain-title,
+.domain-hero__title,
+.cluster-hero__title,
+.decision-hero__title {
+  color: var(--abs-text);
+}
+
+.home-vertical-card p,
+.domain-row__body,
+.cluster-row__main,
+.decision-guidance__body,
+.decision-changes__text,
+.related-questions__text {
+  color: var(--abs-muted);
+}
+
+.home-vertical-card__meta,
+.domain-row__meta {
+  color: var(--abs-soft);
+}
+
+/* Dense homepage grid for 16 buying areas */
+.home-vertical-grid--dense,
+.autobuy-homepage .home-vertical-grid {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.autobuy-homepage .home-vertical-card {
+  min-height: 0;
+  padding: 18px;
+}
+
+.autobuy-homepage .home-vertical-card h3 {
+  font-size: 1.08rem;
+}
+
+.autobuy-homepage .home-vertical-card p {
+  font-size: 0.96rem;
+  line-height: 1.45;
+}
+
+/* -------------------------
+   Decision pages
+   ------------------------- */
+
+.decision-hero__title {
+  font-size: clamp(2.45rem, 5.8vw, 5rem);
+  line-height: 0.98;
+  letter-spacing: -0.058em;
+  font-weight: 820;
+}
+
+.decision-bottom-line__inner {
+  background:
+    linear-gradient(180deg, rgba(36, 211, 194, 0.07), rgba(158, 220, 230, 0.02)),
+    var(--abs-panel-2);
+  border-color: rgba(36, 211, 194, 0.2);
+}
+
+.decision-bottom-line__text {
+  color: rgba(242, 248, 250, 0.94);
+  font-size: clamp(1.35rem, 2.4vw, 2.1rem);
+  line-height: 1.22;
+  letter-spacing: -0.035em;
+  font-weight: 740;
+}
+
+.decision-factor__title,
+.decision-guidance__title {
+  color: var(--abs-text);
+}
+
+.decision-factor__body {
+  color: var(--abs-muted);
+  font-size: clamp(1.02rem, 1.35vw, 1.12rem);
+  line-height: 1.62;
+}
+
+/* -------------------------
+   Related questions
+   ------------------------- */
+
+.related-questions {
+  border-top-color: var(--abs-line-strong);
+}
+
+.related-questions__arrow {
+  background:
+    linear-gradient(180deg, var(--abs-teal-2), var(--abs-teal));
+  color: #061113;
+}
+
+.related-questions__link:hover .related-questions__arrow {
+  background:
+    linear-gradient(180deg, #84fff4, var(--abs-teal));
+}
+
+/* -------------------------
+   CTAs / buttons
+   ------------------------- */
+
+.home-domain-cta,
+.decision-cta__button,
+.share-situation-form button {
+  background:
+    linear-gradient(180deg, var(--abs-teal-2), var(--abs-teal));
+  color: #061113;
+  border-radius: 7px;
+  font-weight: 950;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  box-shadow:
+    inset 0 -2px 0 rgba(0, 0, 0, 0.16),
+    0 10px 24px rgba(36, 211, 194, 0.14);
+}
+
+.home-domain-cta:hover,
+.decision-cta__button:hover,
+.share-situation-form button:hover {
+  background:
+    linear-gradient(180deg, #84fff4, var(--abs-teal));
+  transform: translateY(-1px);
+}
+
+/* -------------------------
+   Forms
+   ------------------------- */
+
+.share-situation-form input,
+.share-situation-form select,
+.share-situation-form textarea {
+  background:
+    linear-gradient(180deg, rgba(158, 220, 230, 0.045), rgba(158, 220, 230, 0.012)),
+    #071014;
+  border-color: var(--abs-line);
+  color: var(--abs-text);
+}
+
+.share-situation-form input::placeholder,
+.share-situation-form textarea::placeholder {
+  color: rgba(242, 248, 250, 0.42);
+}
+
+.share-situation-form input:focus,
+.share-situation-form select:focus,
+.share-situation-form textarea:focus {
+  border-color: rgba(36, 211, 194, 0.7);
+  box-shadow: 0 0 0 3px rgba(36, 211, 194, 0.12);
+}
+
+/* -------------------------
+   Focus / selection
+   ------------------------- */
+
+::selection {
+  background: rgba(36, 211, 194, 0.34);
+  color: #ffffff;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(36, 211, 194, 0.72);
+  outline-offset: 3px;
+}
+
+@media (max-width: 700px) {
+  .autobuy-homepage .home-vertical-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .decision-hero__title {
+    font-size: clamp(2.25rem, 10vw, 3.6rem);
+  }
+}
+
+/* =========================================================
+   AUTOBUYSCOPE FINAL POLISH PASS
+   Softer text hierarchy, cleaner homepage, tighter mobile UI
+   ========================================================= */
+
+/* -------------------------
+   Global polish
+   ------------------------- */
+
+body {
+  background: #081116;
+  color: rgba(242, 248, 250, 0.94);
+}
+
+.page-shell {
+  background:
+    radial-gradient(circle at 50% -10%, rgba(36, 211, 194, 0.12), transparent 26rem),
+    radial-gradient(circle at 100% 8%, rgba(74, 168, 255, 0.08), transparent 28rem),
+    linear-gradient(180deg, #0b171d 0%, #081116 42%, #071014 100%);
+}
+
+.page-width {
+  max-width: 920px;
+}
+
+/* -------------------------
+   Labels / section rules
+   ------------------------- */
+
+.section-rule-label,
+.section-label,
+.home-brand-kicker,
+.domain-hero__eyebrow,
+.cluster-hero__eyebrow,
+.decision-hero__eyebrow,
+.decision-bottom-line__eyebrow,
+.related-questions__eyebrow,
+.decision-disclaimer__eyebrow,
+.decision-disclaimer__label,
+.decision-cta__label,
+.share-situation-form label span {
+  color: #38e3d5;
+  letter-spacing: 0.18em;
+}
+
+.section-rule-line {
+  background: rgba(158, 220, 230, 0.22);
+}
+
+.section-copy {
+  color: rgba(242, 248, 250, 0.72);
+  font-weight: 430;
+  line-height: 1.52;
+}
+
+/* -------------------------
+   Homepage hero cleanup
+   ------------------------- */
+
+.home-brand-slab {
+  border-radius: 18px;
+  border-color: rgba(158, 220, 230, 0.2);
+  background:
+    linear-gradient(180deg, rgba(242, 248, 250, 0.045), rgba(242, 248, 250, 0.012)),
+    rgba(16, 26, 32, 0.88);
+  box-shadow:
+    inset 0 1px 0 rgba(242, 248, 250, 0.05),
+    0 18px 44px rgba(0, 0, 0, 0.22);
+}
+
+.home-brand-name {
+  color: rgba(242, 248, 250, 0.97);
+  font-weight: 850;
+  letter-spacing: -0.075em;
+}
+
+.home-brand-deck {
+  color: rgba(242, 248, 250, 0.76);
+  line-height: 1.42;
+}
+
+/* Make the intro/library block intentional instead of accidental */
+.home-live-domain .home-domain-link {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.home-domain-title {
+  color: rgba(242, 248, 250, 0.96);
+}
+
+.home-domain-body {
+  max-width: 43rem;
+  color: rgba(242, 248, 250, 0.72);
+  font-weight: 430;
+  line-height: 1.5;
+}
+
+.home-domain-cta {
+  margin-top: 22px;
+}
+
+/* If old copy says Repair Areas, CSS cannot rename it.
+   Update JSX text to Buying areas if still showing. */
+
+/* -------------------------
+   Search
+   ------------------------- */
+
+.home-search__input {
+  border-radius: 12px;
+  border-color: rgba(158, 220, 230, 0.2);
+  background:
+    linear-gradient(180deg, rgba(158, 220, 230, 0.055), rgba(158, 220, 230, 0.015)),
+    #071014;
+  color: rgba(242, 248, 250, 0.92);
+}
+
+.home-search__input::placeholder {
+  color: rgba(242, 248, 250, 0.52);
+}
+
+/* -------------------------
+   Homepage/domain/cluster cards
+   ------------------------- */
+
+.home-vertical-card,
+.domain-row,
+.cluster-row {
+  border-radius: 16px;
+  border-color: rgba(158, 220, 230, 0.18);
+  background:
+    linear-gradient(180deg, rgba(158, 220, 230, 0.042), rgba(158, 220, 230, 0.014)),
+    rgba(16, 26, 32, 0.8);
+  box-shadow:
+    inset 0 1px 0 rgba(242, 248, 250, 0.035),
+    0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.home-vertical-card:hover,
+.domain-row:hover,
+.cluster-row:hover {
+  border-color: rgba(56, 227, 213, 0.44);
+  background:
+    linear-gradient(180deg, rgba(56, 227, 213, 0.07), rgba(158, 220, 230, 0.018)),
+    rgba(18, 34, 42, 0.9);
+  transform: translateY(-1px);
+}
+
+.home-vertical-card h3,
+.domain-row__title,
+.cluster-row__title {
+  color: rgba(242, 248, 250, 0.94);
+  letter-spacing: -0.045em;
+}
+
+.home-vertical-card p,
+.domain-row__body {
+  color: rgba(242, 248, 250, 0.7);
+  font-weight: 430;
+  line-height: 1.48;
+}
+
+.home-vertical-card__meta,
+.domain-row__meta {
+  color: rgba(242, 248, 250, 0.5);
+}
+
+.home-vertical-card__top span,
+.domain-row__arrow,
+.cluster-row__arrow {
+  color: #38e3d5;
+}
+
+/* Dense area cards should feel like tiles, not huge article cards */
+.autobuy-homepage .home-vertical-grid,
+.home-vertical-grid--dense {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(238px, 1fr));
+  gap: 14px;
+}
+
+.autobuy-homepage .home-vertical-card {
+  padding: 18px;
+  min-height: 0;
+}
+
+.autobuy-homepage .home-vertical-card h3 {
+  font-size: clamp(1.2rem, 4.8vw, 1.55rem);
+  line-height: 1.02;
+}
+
+.autobuy-homepage .home-vertical-card p {
+  font-size: 0.98rem;
+}
+
+/* -------------------------
+   Domain / cluster pages
+   ------------------------- */
+
+.domain-hero__title,
+.cluster-hero__title {
+  color: rgba(242, 248, 250, 0.97);
+  letter-spacing: -0.065em;
+}
+
+.domain-hero__body,
+.cluster-hero__body,
+.domain-list-section__intro,
+.cluster-list-section__intro {
+  color: rgba(242, 248, 250, 0.72);
+  font-weight: 430;
+  line-height: 1.52;
+}
+
+/* -------------------------
+   Decision page: hero and bottom line
+   ------------------------- */
+
+.decision-hero__title {
+  color: rgba(242, 248, 250, 0.98);
+  font-size: clamp(2.25rem, 9.5vw, 4.8rem);
+  line-height: 0.98;
+  letter-spacing: -0.064em;
+  font-weight: 830;
+}
+
+.decision-bottom-line__inner,
+.decision-bottom-line,
+.decision-bottom-line__card {
+  border-color: rgba(56, 227, 213, 0.24);
+  background:
+    linear-gradient(180deg, rgba(56, 227, 213, 0.075), rgba(158, 220, 230, 0.018)),
+    rgba(18, 42, 48, 0.72);
+}
+
+/* This is the key fix: stop the bottom line from shouting */
+.decision-bottom-line__text {
+  color: rgba(242, 248, 250, 0.92);
+  font-size: clamp(1.12rem, 4.6vw, 1.55rem);
+  line-height: 1.34;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+}
+
+/* -------------------------
+   Decision article sections
+   ------------------------- */
+
+.decision-factor__title {
+  color: rgba(242, 248, 250, 0.93);
+  font-size: clamp(1.15rem, 5vw, 1.55rem);
+  line-height: 1.25;
+  letter-spacing: -0.035em;
+  font-weight: 720;
+}
+
+.decision-factor__body,
+.decision-guidance__body,
+.decision-changes__text {
+  color: rgba(242, 248, 250, 0.72);
+  font-weight: 430;
+  line-height: 1.58;
+}
+
+.decision-changes__item,
+.decision-changes__row,
+.decision-guidance__card {
+  border-color: rgba(158, 220, 230, 0.18);
+  background:
+    linear-gradient(180deg, rgba(158, 220, 230, 0.04), rgba(158, 220, 230, 0.012)),
+    rgba(16, 26, 32, 0.76);
+}
+
+.decision-changes__marker {
+  background: #38e3d5;
+  box-shadow: 0 0 20px rgba(56, 227, 213, 0.26);
+}
+
+/* -------------------------
+   Related questions
+   ------------------------- */
+
+.related-questions {
+  border-top-color: rgba(158, 220, 230, 0.26);
+}
+
+.related-questions__link {
+  border-radius: 16px;
+  border-color: rgba(158, 220, 230, 0.2);
+  background:
+    linear-gradient(180deg, rgba(158, 220, 230, 0.045), rgba(158, 220, 230, 0.014)),
+    rgba(16, 26, 32, 0.84);
+}
+
+.related-questions__link:hover {
+  border-color: rgba(56, 227, 213, 0.5);
+  background:
+    linear-gradient(180deg, rgba(56, 227, 213, 0.075), rgba(158, 220, 230, 0.016)),
+    rgba(18, 34, 42, 0.9);
+}
+
+.related-questions__text {
+  color: rgba(242, 248, 250, 0.76);
+  font-size: clamp(1.05rem, 4.5vw, 1.35rem);
+  line-height: 1.3;
+  letter-spacing: -0.035em;
+  font-weight: 720;
+}
+
+.related-questions__arrow {
+  width: 54px;
+  height: 54px;
+  min-width: 54px;
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, #64f3e7, #28d2c4);
+  color: #061113;
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+/* -------------------------
+   CTA / buttons
+   ------------------------- */
+
+.home-domain-cta,
+.decision-cta__button,
+.share-situation-form button {
+  border-radius: 9px;
+  background:
+    linear-gradient(180deg, #64f3e7, #28d2c4);
+  color: #061113;
+  font-weight: 950;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+  box-shadow:
+    inset 0 -2px 0 rgba(0, 0, 0, 0.16),
+    0 12px 26px rgba(36, 211, 194, 0.14);
+}
+
+.home-domain-cta:hover,
+.decision-cta__button:hover,
+.share-situation-form button:hover {
+  background:
+    linear-gradient(180deg, #88fff5, #28d2c4);
+  transform: translateY(-1px);
+}
+
+/* -------------------------
+   Disclaimer
+   ------------------------- */
+
+.decision-disclaimer {
+  border-top: 1px solid rgba(158, 220, 230, 0.16);
+}
+
+.decision-disclaimer__body {
+  color: rgba(242, 248, 250, 0.58);
+  font-weight: 420;
+  line-height: 1.55;
+}
+
+/* -------------------------
+   Mobile tightening
+   ------------------------- */
+
+@media (max-width: 700px) {
+  .page-width {
+    width: min(100% - 34px, 920px);
+  }
+
+  .home-stack {
+    gap: 28px;
+  }
+
+  .home-brand-slab {
+    border-radius: 16px;
+  }
+
+  .home-brand-name {
+    font-size: clamp(2.9rem, 14vw, 4.4rem);
+    line-height: 0.88;
+  }
+
+  .home-brand-deck {
+    font-size: 1.12rem;
+  }
+
+  .home-domain-body,
+  .section-copy,
+  .domain-hero__body,
+  .cluster-hero__body {
+    font-size: 1.05rem;
+  }
+
+  .decision-hero__title {
+    font-size: clamp(2.35rem, 11vw, 3.9rem);
+  }
+
+  .decision-bottom-line__text {
+    font-size: clamp(1.08rem, 4.9vw, 1.38rem);
+    line-height: 1.34;
+  }
+
+  .decision-factor__title {
+    font-size: clamp(1.12rem, 5.4vw, 1.45rem);
+  }
+
+  .related-questions__link {
+    padding: 22px 18px;
+  }
+
+  .related-questions__arrow {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    font-size: 1.8rem;
+  }
+}
+
+/* =========================================================
+   AUTOBUYSCOPE – CLEANER / LIGHTER FRONTIER PASS
+   Paste at bottom of src/styles/autobuy-theme.css
+   ========================================================= */
+
+:root {
+  --auto-accent: #42e5df;
+  --auto-accent-soft: rgba(66, 229, 223, 0.16);
+  --auto-text-strong: rgba(245, 248, 250, 0.95);
+  --auto-text: rgba(221, 231, 236, 0.80);
+  --auto-text-soft: rgba(178, 195, 203, 0.62);
+  --auto-line: rgba(129, 176, 191, 0.24);
+  --auto-border: rgba(116, 171, 188, 0.22);
+  --auto-panel:
+    linear-gradient(180deg, rgba(9, 20, 29, 0.88), rgba(7, 17, 25, 0.92));
+  --auto-panel-2:
+    linear-gradient(180deg, rgba(13, 28, 40, 0.82), rgba(8, 18, 27, 0.92));
+  --auto-glow: 0 18px 40px rgba(0, 0, 0, 0.22);
+}
+
+/* Wider breathing room / calmer reading rhythm */
+
+.page-width {
+  max-width: 760px;
+}
+
+.section-copy,
+.cluster-hero__body,
+.decision-guidance__body,
+.decision-disclaimer__body,
+.decision-cta__body {
+  color: var(--auto-text);
+  line-height: 1.62;
+}
+
+/* =========================
+   HERO / TOP MATTER
+   ========================= */
+
+.decision-hero,
+.cluster-hero {
+  margin: 34px 0 28px;
+}
+
+.decision-hero__eyebrow,
+.cluster-hero__eyebrow,
+.related-questions__eyebrow,
+.decision-disclaimer__eyebrow,
+.decision-disclaimer__label,
+.decision-cta__label {
+  color: var(--auto-accent);
+  letter-spacing: 0.16em;
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.decision-hero__title,
+.cluster-hero__title {
+  max-width: 10ch;
+  color: var(--auto-text-strong);
+  line-height: 0.94;
+  letter-spacing: -0.06em;
+  text-wrap: balance;
+}
+
+.decision-hero__title {
+  font-size: clamp(2.9rem, 12vw, 5.2rem);
+}
+
+.cluster-hero__title {
+  font-size: clamp(2.7rem, 11vw, 4.9rem);
+}
+
+.cluster-hero__body {
+  max-width: 34ch;
+  margin-top: 18px;
+  font-size: clamp(1.04rem, 4.5vw, 1.2rem);
+}
+
+/* =========================
+   SECTION RULES
+   ========================= */
+
+.section-rule {
+  margin: 0 0 18px;
+}
+
+.section-rule-label {
+  color: var(--auto-accent);
+  letter-spacing: 0.16em;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.section-rule-line {
+  background: var(--auto-line);
+}
+
+/* =========================
+   BOTTOM LINE
+   Make it still important,
+   but less giant / oppressive
+   ========================= */
+
+.decision-bottom-line {
+  margin: 14px 0 34px;
+}
+
+.decision-bottom-line__inner {
+  padding: 24px 22px 24px;
+  border-radius: 24px;
+  border: 1px solid var(--auto-border);
+  background: linear-gradient(
+    180deg,
+    rgba(18, 48, 58, 0.88),
+    rgba(13, 34, 43, 0.96)
+  );
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+    var(--auto-glow);
+}
+
+.decision-bottom-line__eyebrow {
+  margin: 0 0 14px;
+  color: var(--auto-accent);
+  font-size: 0.84rem;
+  letter-spacing: 0.18em;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.decision-bottom-line__text {
+  margin: 0;
+  max-width: 26ch;
+  color: var(--auto-text-strong);
+  font-size: clamp(1.22rem, 5.2vw, 1.62rem);
+  line-height: 1.2;
+  font-weight: 720;
+  letter-spacing: -0.03em;
+}
+
+/* =========================
+   FACTORS
+   Less crowded, more scan-friendly
+   ========================= */
+
+.decision-factors {
+  margin-top: 8px;
+}
+
+.decision-factors__list {
+  display: grid;
+  gap: 0;
+}
+
+.decision-factor {
+  padding: 20px 0 22px;
+  border-top: 1px solid var(--auto-line);
+}
+
+.decision-factor:first-child {
+  border-top: 0;
+}
+
+.decision-factor__title {
+  margin: 0;
+  max-width: 24ch;
+  color: var(--auto-text-strong);
+  font-size: clamp(1.18rem, 4.7vw, 1.56rem);
+  line-height: 1.18;
+  letter-spacing: -0.03em;
+  font-weight: 740;
+}
+
+.decision-factor__body {
+  margin: 10px 0 0;
+  max-width: 42ch;
+  color: var(--auto-text);
+  font-size: 1rem;
+  line-height: 1.62;
+}
+
+/* =========================
+   WHAT CHANGES THE ANSWER
+   Cleaner tiles, lighter copy
+   ========================= */
+
+.decision-changes {
+  margin-top: 6px;
+}
+
+.decision-changes__list {
+  display: grid;
+  gap: 16px;
+}
+
+.decision-changes__item {
+  margin: 0;
+}
+
+.decision-changes__row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: start;
+  padding: 19px 18px 18px;
+  border-radius: 20px;
+  border: 1px solid var(--auto-border);
+  background: var(--auto-panel);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+}
+
+.decision-changes__marker {
+  width: 12px;
+  height: 12px;
+  margin-top: 0.5em;
+  border-radius: 999px;
+  background: var(--auto-accent);
+  box-shadow: 0 0 0 6px rgba(66, 229, 223, 0.08);
+}
+
+.decision-changes__text {
+  color: var(--auto-text-strong);
+  font-size: clamp(1.03rem, 4.25vw, 1.18rem);
+  line-height: 1.56;
+  font-weight: 520;
+}
+
+/* =========================
+   NEXT STEP / EXCEPTION
+   ========================= */
+
+.decision-guidance {
+  margin-top: 10px;
+}
+
+.decision-guidance__card {
+  padding: 22px 20px 22px;
+  border-radius: 22px;
+  border: 1px solid var(--auto-border);
+  background: var(--auto-panel);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.025),
+    0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+.decision-guidance__title {
+  margin: 0 0 10px;
+  color: var(--auto-text-strong);
+  font-size: clamp(1.16rem, 4.7vw, 1.36rem);
+  line-height: 1.22;
+  font-weight: 720;
+  letter-spacing: -0.03em;
+}
+
+.decision-guidance__body {
+  margin: 0;
+  max-width: 43ch;
+  font-size: 1.02rem;
+}
+
+/* =========================
+   CTA
+   Strong but not oversized
+   ========================= */
+
+.decision-cta--decision-inline {
+  margin: 36px 0 42px;
+  padding: 22px 20px 24px;
+  border-radius: 24px;
+  border: 1px solid var(--auto-border);
+  background: linear-gradient(
+    180deg,
+    rgba(23, 28, 22, 0.94),
+    rgba(18, 22, 18, 0.98)
+  );
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 16px 38px rgba(0, 0, 0, 0.2);
+}
+
+.decision-cta--decision-inline .decision-cta__title {
+  margin: 0;
+  max-width: 12ch;
+  color: var(--auto-text-strong);
+  font-size: clamp(1.8rem, 7.8vw, 2.6rem);
+  line-height: 1.02;
+  letter-spacing: -0.05em;
+  font-weight: 760;
+  text-wrap: balance;
+}
+
+.decision-cta--decision-inline .decision-cta__body {
+  margin: 14px 0 20px;
+  max-width: 31ch;
+  font-size: 1.02rem;
+}
+
+.decision-cta--decision-inline .decision-cta__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 0 20px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #7df1ea, #62ddd6);
+  color: #071317;
+  font-size: 1rem;
+  font-weight: 850;
+  text-decoration: none;
+  box-shadow: 0 10px 24px rgba(66, 229, 223, 0.18);
+}
+
+/* =========================
+   RELATED QUESTIONS
+   Make them clearer, more tappable,
+   less muddy / washed out
+   ========================= */
+
+.related-questions {
+  margin-top: 40px;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.related-questions__head {
+  padding: 0 0 14px;
+  border-bottom: 1px solid var(--auto-line);
+}
+
+.related-questions__eyebrow {
+  margin: 0;
+}
+
+.related-questions__list {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.related-questions__item {
+  border-top: 0;
+}
+
+.related-questions__link {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 18px 16px 18px 18px;
+  border-radius: 20px;
+  border: 1px solid var(--auto-border);
+  background: var(--auto-panel-2);
+  transition:
+    transform 140ms ease,
+    border-color 140ms ease,
+    background 140ms ease;
+}
+
+.related-questions__link:hover {
+  transform: translateY(-1px);
+  border-color: rgba(125, 217, 229, 0.34);
+  background: linear-gradient(
+    180deg,
+    rgba(14, 32, 44, 0.9),
+    rgba(8, 20, 30, 0.96)
+  );
+}
+
+.related-questions__link--disabled {
+  opacity: 0.7;
+}
+
+.related-questions__text {
+  margin: 0;
+  color: var(--auto-text-strong);
+  font-size: clamp(1.08rem, 4.5vw, 1.34rem);
+  line-height: 1.38;
+  font-weight: 660;
+}
+
+.related-questions__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #62ebe5, #43dad4);
+  color: #041115;
+  font-size: 1.55rem;
+  font-weight: 900;
+  line-height: 1;
+  box-shadow: 0 10px 22px rgba(67, 218, 212, 0.14);
+}
+
+/* =========================
+   DISCLAIMER
+   ========================= */
+
+.decision-disclaimer {
+  margin-top: 54px;
+  padding-top: 2px;
+}
+
+.decision-disclaimer__body {
+  max-width: 44ch;
+  margin: 10px 0 22px;
+  color: var(--auto-text-soft);
+  font-size: 0.98rem;
+  line-height: 1.68;
+}
+
+/* =========================
+   CLUSTER PAGE CARDS
+   ========================= */
+
+.cluster-list {
+  display: grid;
+  gap: 14px;
+}
+
+.cluster-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: start;
+  padding: 20px 18px;
+  border-radius: 22px;
+  border: 1px solid var(--auto-border);
+  background: var(--auto-panel);
+  transition:
+    transform 140ms ease,
+    border-color 140ms ease,
+    background 140ms ease;
+}
+
+.cluster-row:hover {
+  transform: translateY(-1px);
+  border-color: rgba(125, 217, 229, 0.34);
+  background: linear-gradient(
+    180deg,
+    rgba(13, 28, 40, 0.9),
+    rgba(7, 18, 26, 0.96)
+  );
+}
+
+.cluster-row__title {
+  margin: 0;
+  color: var(--auto-text-strong);
+  font-size: clamp(1.14rem, 4.6vw, 1.46rem);
+  line-height: 1.28;
+  font-weight: 720;
+  letter-spacing: -0.03em;
+}
+
+.cluster-row__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: rgba(66, 229, 223, 0.12);
+  color: var(--auto-accent);
+  font-size: 1.45rem;
+  font-weight: 900;
+}
+
+/* =========================
+   SEARCH BAR
+   Less heavy / more integrated
+   ========================= */
+
+.home-search__input {
+  min-height: 58px;
+  border-radius: 18px;
+  border: 1px solid var(--auto-border);
+  background: rgba(5, 14, 22, 0.78);
+  color: var(--auto-text-strong);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.015);
+}
+
+.home-search__input::placeholder {
+  color: rgba(197, 212, 219, 0.58);
+}
+
+.home-search__panel {
+  border-radius: 18px;
+  border: 1px solid var(--auto-border);
+  background: rgba(8, 18, 27, 0.98);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
+}
+
+/* =========================
+   MOBILE TUNE
+   ========================= */
+
+@media (max-width: 640px) {
+  .decision-hero,
+  .cluster-hero {
+    margin: 28px 0 24px;
+  }
+
+  .decision-bottom-line__inner,
+  .decision-guidance__card,
+  .decision-cta--decision-inline,
+  .cluster-row,
+  .related-questions__link {
+    border-radius: 20px;
+  }
+
+  .decision-bottom-line__text {
+    max-width: 24ch;
+    font-size: clamp(1.16rem, 5vw, 1.44rem);
+    line-height: 1.22;
+  }
+
+  .decision-changes__row {
+    padding: 18px 16px;
+  }
+
+  .decision-changes__text {
+    font-size: 1rem;
+    line-height: 1.54;
+  }
+
+  .related-questions__arrow {
+    width: 44px;
+    height: 44px;
+    font-size: 1.4rem;
+  }
+
+  .decision-cta--decision-inline .decision-cta__button {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   FRONTEND COMPRESSION CONTROLS
+   ========================================================= */
+
+.expandable-text__content {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.expandable-text.is-expanded .expandable-text__content {
+  display: block;
+}
+
+.expandable-text__button,
+.progressive-list__button {
+  margin-top: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid rgba(66, 229, 223, 0.3);
+  border-radius: 999px;
+  background: rgba(66, 229, 223, 0.08);
+  color: #42e5df;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.expandable-text__button:hover,
+.progressive-list__button:hover {
+  background: rgba(66, 229, 223, 0.14);
+  border-color: rgba(66, 229, 223, 0.52);
+}
+
+/* =========================================================
+   AUTOBUYSCOPE ACCENT REBALANCE
+   Less neon teal, more steel/auto-console
+   ========================================================= */
+
+:root {
+  --auto-accent: #6fb7ff;
+  --auto-accent-2: #8ed0ff;
+  --auto-action: #42e5df;
+  --auto-action-2: #74f2ea;
+  --auto-accent-soft: rgba(111, 183, 255, 0.14);
+  --auto-action-soft: rgba(66, 229, 223, 0.14);
+  --auto-line: rgba(132, 177, 205, 0.22);
+  --auto-border: rgba(132, 177, 205, 0.22);
+}
+
+/* Main labels become steel blue instead of neon teal */
+.section-rule-label,
+.section-label,
+.home-brand-kicker,
+.domain-hero__eyebrow,
+.cluster-hero__eyebrow,
+.decision-hero__eyebrow,
+.decision-bottom-line__eyebrow,
+.related-questions__eyebrow,
+.decision-disclaimer__eyebrow,
+.decision-disclaimer__label,
+.decision-cta__label,
+.share-situation-form label span {
+  color: var(--auto-accent);
+  text-shadow: none;
+}
+
+/* Lines/borders cooler */
+.section-rule-line,
+.related-questions__head,
+.decision-disclaimer {
+  border-color: var(--auto-line);
+}
+
+.section-rule-line {
+  background: var(--auto-line);
+}
+
+/* Keep action elements teal so clicks still pop */
+.home-vertical-card__top span,
+.domain-row__arrow,
+.cluster-row__arrow,
+.related-questions__arrow,
+.decision-changes__marker {
+  color: var(--auto-action);
+}
+
+.related-questions__arrow,
+.decision-cta__button,
+.home-domain-cta,
+.share-situation-form button {
+  background: linear-gradient(180deg, var(--auto-action-2), var(--auto-action));
+  color: #041115;
+}
+
+/* Bottom line becomes less glowing-green */
+.decision-bottom-line__inner {
+  border-color: rgba(111, 183, 255, 0.24);
+  background:
+    linear-gradient(180deg, rgba(36, 67, 86, 0.72), rgba(12, 30, 42, 0.95));
+}
+
+/* Buttons use blue outline, teal only on hover/action */
+.expandable-text__button,
+.progressive-list__button {
+  border-color: rgba(111, 183, 255, 0.34);
+  background: rgba(111, 183, 255, 0.08);
+  color: var(--auto-accent-2);
+}
+
+.expandable-text__button:hover,
+.progressive-list__button:hover {
+  border-color: rgba(66, 229, 223, 0.48);
+  background: rgba(66, 229, 223, 0.11);
+  color: var(--auto-action-2);
+}
+
+@media (max-width: 700px) {
+  .home-brand-name {
+    font-size: clamp(2.45rem, 12.2vw, 3.65rem);
+    letter-spacing: -0.075em;
+    white-space: nowrap;
+    max-width: 100%;
+  }
+
+  .home-brand-slab {
+    overflow: hidden;
+  }
+}
+
+@media (min-width: 761px) {
+  .autobuy-homepage .home-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(260px, 0.8fr);
+    gap: 18px;
+    align-items: stretch;
+  }
+
+  .autobuy-homepage .home-hero-art {
+    grid-column: 1 / -1;
+  }
+
+  .autobuy-homepage .home-brand-slab {
+    min-height: 100%;
+  }
+}
+
+.cluster-compare-panel {
+  margin: 20px 0 34px;
+  padding: 18px;
+  border: 1px solid rgba(132, 177, 205, 0.2);
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(13, 28, 40, 0.72), rgba(7, 18, 26, 0.92));
+}
+
+.cluster-compare-panel__label {
+  color: #8ed0ff;
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.cluster-compare-panel__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.cluster-compare-panel__grid span {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(132, 177, 205, 0.07);
+  color: rgba(245, 248, 250, 0.82);
+  font-size: 0.92rem;
+  font-weight: 650;
+}
+
+@media (max-width: 560px) {
+  .cluster-compare-panel__grid {
+    grid-template-columns: 1fr;
+  }
 }

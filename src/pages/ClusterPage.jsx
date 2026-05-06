@@ -3,13 +3,18 @@ import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Header from "../components/Header";
 import { supabase } from "../lib/supabase";
-import { getDomainConfig } from "../lib/domainConfig";
+import {
+  getDomainConfig,
+  getAutoBuyBranchKeyFromRoute,
+} from "../lib/domainConfig";
 import { titleFromSlug } from "../lib/routeHelpers";
 
-const SITE_NAME = "HomeFixScope";
+const SITE_NAME = "AutoBuyScope";
 
-function branchKeyFromRoute(domainSlug, familySlug) {
-  return `${domainSlug}_${String(familySlug || "").replace(/-/g, "_")}`;
+function buildClusterDescription(familyTitle, domainTitle) {
+  const text = `Browse ${familyTitle.toLowerCase()} car-buying decision guides in ${domainTitle}. Compare the specific price, condition, seller, timing, paperwork, inspection, or confidence issue that changes the buying decision.`;
+
+  return text.length > 158 ? `${text.slice(0, 155)}...` : text;
 }
 
 export default function ClusterPage() {
@@ -31,7 +36,7 @@ export default function ClusterPage() {
         setLoading(true);
         setError("");
 
-        const branchKey = branchKeyFromRoute(domainSlug, familySlug);
+        const branchKey = getAutoBuyBranchKeyFromRoute(domainSlug, familySlug);
         setDebugBranchKey(branchKey);
 
         const { data, error } = await supabase
@@ -63,12 +68,12 @@ export default function ClusterPage() {
   }, [domainSlug, familySlug]);
 
   return (
-    <main className="page-shell cluster-page">
+    <main className="page-shell cluster-page autobuy-cluster-page">
       <Helmet>
         <title>{`${familyTitle} | ${domainTitle} | ${SITE_NAME}`}</title>
         <meta
           name="description"
-          content={`Browse ${familyTitle.toLowerCase()} repair decision guides in ${domainTitle} on HomeFixScope.`}
+          content={buildClusterDescription(familyTitle, domainTitle)}
         />
       </Helmet>
 
@@ -80,7 +85,9 @@ export default function ClusterPage() {
             <Link to={`/${domainSlug}`} className="decision-breadcrumbs__link">
               {domainTitle}
             </Link>
-            <span className="decision-breadcrumbs__sep">→</span>
+            <span className="decision-breadcrumbs__sep" aria-hidden="true">
+              →
+            </span>
           </span>
 
           <span className="decision-breadcrumbs__item">
@@ -94,18 +101,39 @@ export default function ClusterPage() {
           <h1 className="cluster-hero__title">{familyTitle}</h1>
 
           <p className="cluster-hero__body">
-            Browse repair decision guides in this set and choose the situation
-            closest to what is happening in the house.
+            These guides focus on one car-buying decision family. Start with the
+            question that best matches the vehicle, seller, price, timing
+            pressure, paperwork issue, inspection concern, or confidence gap you
+            are weighing.
           </p>
         </section>
 
-        <section className="cluster-list-section">
+<section className="cluster-compare-panel" aria-label="What this question set helps compare">
+  <div className="cluster-compare-panel__label">This set helps compare</div>
+
+  <div className="cluster-compare-panel__grid">
+    <span>Price pressure</span>
+    <span>Condition risk</span>
+    <span>Seller signal</span>
+    <span>Timing pressure</span>
+  </div>
+</section>
+
+        <section className="cluster-list-section" aria-labelledby="cluster-guides-heading">
           <div className="section-rule">
-            <span className="section-rule-label">Repair guides</span>
+            <span id="cluster-guides-heading" className="section-rule-label">
+              Buying guides
+            </span>
             <span className="section-rule-line" />
           </div>
 
-          {loading ? <p className="section-copy">Loading repair guides…</p> : null}
+          <p className="section-copy cluster-list-section__intro">
+            Each guide narrows the decision to a specific buying situation:
+            whether to buy, wait, negotiate, inspect further, finance, compare,
+            or walk away.
+          </p>
+
+          {loading ? <p className="section-copy">Loading buying guides…</p> : null}
           {error ? <p className="section-copy">{error}</p> : null}
 
           {!loading && !error ? (
@@ -120,13 +148,15 @@ export default function ClusterPage() {
                     <p className="cluster-row__title">{row.topic_title}</p>
                   </div>
 
-                  <div className="cluster-row__arrow">→</div>
+                  <div className="cluster-row__arrow" aria-hidden="true">
+                    →
+                  </div>
                 </Link>
               ))}
 
               {rows.length === 0 ? (
                 <p className="section-copy">
-                  No published repair guides in this question set yet.
+                  No published car-buying guides in this question set yet.
                   Looking for branch key: <code>{debugBranchKey}</code>
                 </p>
               ) : null}

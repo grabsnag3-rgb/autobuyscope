@@ -1,164 +1,275 @@
+export const SITE_PREFIX = "autobuy_";
+
 export const DOMAIN_CONFIG = {
-  leak: {
-    key: "leak",
-    label: "Leaks & water intrusion",
-    motif: "field-grid",
-    accent: "safety-orange",
+  used: {
+    key: "used",
+    dbPrefix: "autobuy_core_used",
+    label: "Used cars",
+    motif: "inspection-grid",
+    accent: "teal",
     domainIntro:
-      "Repair timing, hidden damage risk, leak source uncertainty, temporary fixes, and quote decisions.",
+      "Used-car buying decisions around condition, mileage, vehicle history, inspection risk, and whether the deal is worth pursuing.",
     clusterIntro:
-      "Browse leak and water-intrusion decision guides by repair situation, risk level, and next step.",
-    families: {
-      "Ceiling & wall leaks":
-        "Stains, active dripping, spreading damage, rain-related leaks, and hidden moisture concerns.",
-      "Basement & crawlspace water":
-        "Seepage, standing water, sump pump issues, grading concerns, and moisture control decisions.",
-      "Source uncertainty":
-        "When the leak source is unclear, intermittent, behind finishes, or disputed by contractors.",
-      "Temporary fixes":
-        "Buckets, tarps, sealants, shutoffs, drying steps, and when a temporary fix is not enough.",
-      "Water damage risk":
-        "Mold risk, wet insulation, damaged drywall, flooring concerns, and when to open things up.",
-      "Leak quotes & scope":
-        "What should be included in a repair quote, when to get another opinion, and what scope gaps matter.",
-    },
+      "Browse used-car decision guides by condition, inspection concern, ownership history, mileage, and deal confidence.",
+    families: {},
   },
 
-  roofing: {
-    key: "roofing",
-    label: "Roofing",
-    motif: "measurement-grid",
-    accent: "muted-brass",
+  money: {
+    key: "money",
+    dbPrefix: "autobuy_money",
+    label: "Money & financing",
+    motif: "price-grid",
+    accent: "teal",
     domainIntro:
-      "Patch-vs-replace choices, leak diagnosis, repair timing, material decisions, and roof quote scope.",
+      "Car-buying decisions around price, financing, monthly payment, total cost, fees, tradeoffs, and affordability.",
     clusterIntro:
-      "Browse roofing decision guides by damage type, timing pressure, quote scope, and replacement tradeoff.",
-    families: {
-      "Patch vs replace":
-        "When a roof repair is enough, when replacement is safer, and what age or damage changes the call.",
-      "Roof leak diagnosis":
-        "Rain leaks, flashing issues, vent leaks, chimney leaks, valleys, and hard-to-find entry points.",
-      "Storm & weather timing":
-        "Temporary protection, weather windows, active leaks, and when delaying creates more damage.",
-      "Materials & roof age":
-        "Shingles, flat roofing, metal roofing, underlayment, decking, and age-related repair limits.",
-      "Roof quotes":
-        "Scope, line items, warranties, decking assumptions, ventilation, and contractor disagreement.",
-    },
+      "Browse car-buying money guides by price, financing terms, payment pressure, fees, and total cost.",
+    families: {},
   },
 
-  hvac: {
-    key: "hvac",
-    label: "HVAC",
-    motif: "system-lines",
-    accent: "clay",
+  timing: {
+    key: "timing",
+    dbPrefix: "autobuy_timing",
+    label: "Timing",
+    motif: "route-lines",
+    accent: "blue",
     domainIntro:
-      "Repair-vs-replace decisions, system age, urgent failures, contractor quotes, and comfort tradeoffs.",
+      "When to buy, wait, revisit, walk away, or move quickly based on market timing, personal urgency, and deal pressure.",
     clusterIntro:
-      "Browse HVAC decision guides by failure type, system age, repair cost, urgency, and comfort risk.",
-    families: {
-      "Repair vs replace":
-        "When a repair still makes sense, when replacement is more practical, and how system age affects the decision.",
-      "No heat or no cooling":
-        "Urgent failures, unsafe temperatures, emergency calls, temporary options, and repair timing.",
-      "System performance":
-        "Weak airflow, uneven rooms, short cycling, noise, humidity, and recurring comfort problems.",
-      "Equipment age & parts":
-        "Old systems, unavailable parts, refrigerant issues, major components, and future repair risk.",
-      "HVAC quotes":
-        "What should be included, when to compare quotes, sizing questions, warranties, and scope gaps.",
-    },
+      "Browse timing guides for buying now, waiting, seasonal pressure, expiring offers, and deal urgency.",
+    families: {},
   },
 
-  plumbing: {
-    key: "plumbing",
-    label: "Plumbing",
-    motif: "pipe-layout",
-    accent: "safety-orange",
+  "use-fit": {
+    key: "use-fit",
+    dbPrefix: "autobuy_usefit",
+    label: "Use fit",
+    motif: "fit-grid",
+    accent: "teal",
     domainIntro:
-      "Leaks, clogs, fixture failures, pipe concerns, DIY-vs-pro choices, and repair quote questions.",
+      "Whether a vehicle fits your commute, family needs, cargo use, driving conditions, and ownership plans.",
     clusterIntro:
-      "Browse plumbing decision guides by leak type, clog severity, fixture issue, safety risk, and repair scope.",
-    families: {
-      "Leaks & shutoffs":
-        "Active leaks, slow leaks, valve issues, supply lines, appliance connections, and when to shut water off.",
-      "Clogs & backups":
-        "Slow drains, recurring clogs, main-line concerns, sewer backups, and when DIY clearing is risky.",
-      "Fixtures & appliances":
-        "Toilets, faucets, sinks, tubs, showers, water heaters, dishwashers, and washing-machine connections.",
-      "Pipe condition":
-        "Old pipes, corrosion, freezing risk, water pressure, repipe questions, and hidden pipe concerns.",
-      "DIY vs plumber":
-        "When a homeowner repair is reasonable and when permits, access, or damage risk make a pro safer.",
-      "Plumbing quotes":
-        "Scope, access cuts, pipe material, cleanup, warranties, and when to get another quote.",
-    },
+      "Browse use-fit guides by commute, family, cargo, climate, mileage, and daily-driving needs.",
+    families: {},
   },
 
-  foundation: {
-    key: "foundation",
-    label: "Foundation & structure",
-    motif: "structural-grid",
-    accent: "muted-brass",
+  "red-flags": {
+    key: "red-flags",
+    dbPrefix: "autobuy_redflags",
+    label: "Red flags",
+    motif: "warning-grid",
+    accent: "red",
     domainIntro:
-      "Cracks, settling, structural warning signs, repair timing, inspection decisions, and quote scope.",
+      "Warning signs that may change a car-buying decision, including title issues, seller behavior, inspection concerns, and deal pressure.",
     clusterIntro:
-      "Browse foundation and structure decision guides by warning sign, movement risk, inspection need, and repair scope.",
-    families: {
-      "Cracks & movement":
-        "Foundation cracks, stair-step cracks, widening gaps, sticking doors, sloping floors, and settlement signs.",
-      "Water near foundation":
-        "Drainage, grading, basement moisture, crawlspace water, gutters, and soil movement concerns.",
-      "Structural warning signs":
-        "Sagging, bowing, shifting, load concerns, damaged beams, and when an issue needs urgent review.",
-      "Inspection decisions":
-        "When to call a structural engineer, foundation contractor, home inspector, or waterproofing company.",
-      "Repair scope & quotes":
-        "Piers, underpinning, crack repair, drainage work, waterproofing, and quote comparison questions.",
-    },
+      "Browse red-flag guides by warning sign, documentation concern, seller pressure, and inspection risk.",
+    families: {},
   },
 
-  electrical: {
-    key: "electrical",
-    label: "Electrical",
-    motif: "circuit-field",
-    accent: "clay",
+  negotiation: {
+    key: "negotiation",
+    dbPrefix: "autobuy_negotiation",
+    label: "Negotiation",
+    motif: "counteroffer-grid",
+    accent: "teal",
     domainIntro:
-      "Safety concerns, breaker issues, fixture problems, DIY-vs-pro decisions, and electrical quote questions.",
+      "Decisions around counteroffers, dealer pressure, asking for repairs, price drops, add-ons, and when to walk away.",
     clusterIntro:
-      "Browse electrical decision guides by safety concern, failure pattern, repair urgency, and pro-vs-DIY risk.",
-    families: {
-      "Safety concerns":
-        "Burning smells, sparks, heat, buzzing, shocks, flickering, and when to stop using a circuit.",
-      "Breakers & panels":
-        "Tripping breakers, overloaded circuits, old panels, subpanels, GFCI/AFCI issues, and service questions.",
-      "Fixtures & devices":
-        "Outlets, switches, lights, fans, appliances, dimmers, and when replacement is not the whole fix.",
-      "DIY vs electrician":
-        "When a simple swap is reasonable and when code, permits, panels, or hidden wiring make it unsafe.",
-      "Electrical quotes":
-        "Scope, troubleshooting time, panel work, permits, materials, access, and quote comparison decisions.",
-    },
+      "Browse negotiation guides by offer type, seller response, repair request, add-on pressure, and walk-away point.",
+    families: {},
+  },
+
+  context: {
+    key: "context",
+    dbPrefix: "autobuy_context",
+    label: "Buying context",
+    motif: "context-map",
+    accent: "blue",
+    domainIntro:
+      "Car-buying decisions shaped by personal situation, local market, urgency, vehicle availability, and outside constraints.",
+    clusterIntro:
+      "Browse buying-context guides by market condition, personal urgency, constraints, and deal situation.",
+    families: {},
+  },
+
+  reliability: {
+    key: "reliability",
+    dbPrefix: "autobuy_reliability",
+    label: "Reliability",
+    motif: "reliability-grid",
+    accent: "teal",
+    domainIntro:
+      "Reliability decisions around known issues, maintenance history, mileage, repairs, ownership risk, and long-term confidence.",
+    clusterIntro:
+      "Browse reliability guides by known problems, maintenance records, age, mileage, and future repair risk.",
+    families: {},
+  },
+
+  specialty: {
+    key: "specialty",
+    dbPrefix: "autobuy_specialty",
+    label: "Specialty vehicles",
+    motif: "specialty-grid",
+    accent: "blue",
+    domainIntro:
+      "Decisions for specialty, niche, enthusiast, work, performance, luxury, or unusual vehicles where normal buying rules may change.",
+    clusterIntro:
+      "Browse specialty-vehicle guides by niche use, unusual risk, ownership cost, inspection need, and resale concern.",
+    families: {},
+  },
+
+  compliance: {
+    key: "compliance",
+    dbPrefix: "autobuy_compliance",
+    label: "Compliance & paperwork",
+    motif: "paperwork-grid",
+    accent: "teal",
+    domainIntro:
+      "Title, registration, emissions, inspection, tax, warranty, and paperwork decisions that can affect whether a deal is safe.",
+    clusterIntro:
+      "Browse compliance guides by title status, registration issue, emissions, inspection, warranty, and paperwork concern.",
+    families: {},
+  },
+
+  comparison: {
+    key: "comparison",
+    dbPrefix: "autobuy_comparison",
+    label: "Comparison shopping",
+    motif: "compare-grid",
+    accent: "teal",
+    domainIntro:
+      "Choosing between vehicles, trims, model years, mileage levels, dealer offers, private listings, and competing tradeoffs.",
+    clusterIntro:
+      "Browse comparison guides by competing vehicle, trim, year, mileage, offer, and ownership tradeoff.",
+    families: {},
+  },
+
+  confidence: {
+    key: "confidence",
+    dbPrefix: "autobuy_confidence",
+    label: "Buyer confidence",
+    motif: "confidence-grid",
+    accent: "blue",
+    domainIntro:
+      "Decision guides for uncertainty, second thoughts, buyer hesitation, inspection doubt, deal pressure, and whether to keep looking.",
+    clusterIntro:
+      "Browse confidence guides by uncertainty type, hesitation, inspection doubt, deal pressure, and walk-away signals.",
+    families: {},
+  },
+
+  channel: {
+    key: "channel",
+    dbPrefix: "autobuy_channel",
+    label: "Buying channel",
+    motif: "channel-grid",
+    accent: "teal",
+    domainIntro:
+      "Whether to buy from a dealer, private seller, online retailer, auction, marketplace, or another channel.",
+    clusterIntro:
+      "Browse buying-channel guides by seller type, platform, negotiation room, inspection access, and transaction risk.",
+    families: {},
+  },
+
+  platform: {
+    key: "platform",
+    dbPrefix: "autobuy_platform",
+    label: "Platforms & listings",
+    motif: "listing-grid",
+    accent: "blue",
+    domainIntro:
+      "Decisions around online listings, marketplaces, pricing tools, vehicle history reports, photos, seller messages, and listing quality.",
+    clusterIntro:
+      "Browse platform guides by listing quality, pricing signal, seller response, report mismatch, and marketplace risk.",
+    families: {},
+  },
+
+  "post-purchase": {
+    key: "post-purchase",
+    dbPrefix: "autobuy_postpurchase",
+    label: "After purchase",
+    motif: "postpurchase-grid",
+    accent: "teal",
+    domainIntro:
+      "Post-purchase decisions around warranty, repairs, return windows, buyer remorse, dealer follow-up, and early ownership problems.",
+    clusterIntro:
+      "Browse post-purchase guides by warranty, early repairs, return window, paperwork, and buyer-remorse concern.",
+    families: {},
+  },
+
+  safety: {
+    key: "safety",
+    dbPrefix: "autobuy_safety",
+    label: "Safety",
+    motif: "safety-grid",
+    accent: "red",
+    domainIntro:
+      "Safety-related buying decisions around crash history, recalls, tires, brakes, warning lights, inspections, and family-use risk.",
+    clusterIntro:
+      "Browse safety guides by warning sign, inspection issue, recall, crash concern, tires, brakes, and risk tolerance.",
+    families: {},
   },
 };
+
+export const AUTOBUY_VERTICALS = Object.values(DOMAIN_CONFIG);
 
 export function getDomainConfig(domainSlug = "") {
   return (
     DOMAIN_CONFIG[domainSlug] || {
       key: domainSlug,
+      dbPrefix: `autobuy_${String(domainSlug).replace(/-/g, "_")}`,
       label: domainSlug
         ? domainSlug
             .split("-")
             .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
             .join(" ")
-        : "Home repair",
-      motif: "field-grid",
-      accent: "safety-orange",
+        : "Car buying",
+      motif: "inspection-grid",
+      accent: "teal",
       domainIntro:
-        "Browse practical repair decision guides for timing, cost, risk, DIY-vs-pro choices, and quote scope.",
+        "Browse practical car-buying decision guides for price, timing, inspection risk, negotiation, paperwork, and whether to walk away.",
       clusterIntro:
-        "Browse this branch of HomeFixScope decision guides and move into individual repair questions from here.",
+        "Browse this branch of AutoBuyScope decision guides and move into individual car-buying questions from here.",
       families: {},
     }
   );
+}
+
+export function getAutoBuyDomainFromBranchKey(branchKey = "") {
+  const key = String(branchKey || "");
+
+  if (key.startsWith("autobuy_core_used_") || key === "autobuy_core_used") {
+    return "used";
+  }
+
+  const match = key.match(/^autobuy_([^_]+)/);
+  const raw = match?.[1] || "";
+
+  const aliases = {
+    usefit: "use-fit",
+    redflags: "red-flags",
+    postpurchase: "post-purchase",
+  };
+
+  return aliases[raw] || raw;
+}
+
+export function getAutoBuyBranchPrefixForDomain(domainSlug = "") {
+  const config = getDomainConfig(domainSlug);
+  return config.dbPrefix;
+}
+
+export function getAutoBuyFamilySlugFromBranchKey(branchKey = "") {
+  const domainSlug = getAutoBuyDomainFromBranchKey(branchKey);
+  const prefix = getAutoBuyBranchPrefixForDomain(domainSlug);
+
+  return String(branchKey || "")
+    .replace(new RegExp(`^${prefix}_?`), "")
+    .replace(/_/g, "-");
+}
+
+export function getAutoBuyBranchKeyFromRoute(domainSlug = "", familySlug = "") {
+  const prefix = getAutoBuyBranchPrefixForDomain(domainSlug);
+  const familyPart = String(familySlug || "").replace(/-/g, "_");
+
+  return familyPart ? `${prefix}_${familyPart}` : prefix;
 }

@@ -5,7 +5,7 @@ export default function DecisionHero({ hero }) {
     <section className="decision-hero" aria-labelledby="decision-question">
       <div className="decision-hero__field">
         <div className="decision-hero__question-wrap">
-          <p className="decision-hero__eyebrow">Repair question</p>
+          <p className="decision-hero__eyebrow">Buying question</p>
           <h1 id="decision-question" className="decision-hero__title">
             {question}
           </h1>

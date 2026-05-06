@@ -4,13 +4,23 @@ import { Helmet } from "react-helmet-async";
 import Header from "../components/Header";
 import "./share-situation.css";
 
-const REPAIR_AREAS = [
-  { value: "plumbing", label: "Plumbing" },
-  { value: "electrical", label: "Electrical" },
-  { value: "leaks", label: "Leaks & water intrusion" },
-  { value: "foundation", label: "Foundation & structure" },
-  { value: "roofing", label: "Roofing" },
-  { value: "hvac", label: "HVAC" },
+const BUYING_AREAS = [
+  { value: "used", label: "Used cars" },
+  { value: "money", label: "Money & financing" },
+  { value: "timing", label: "Timing" },
+  { value: "use-fit", label: "Use fit" },
+  { value: "red-flags", label: "Red flags" },
+  { value: "negotiation", label: "Negotiation" },
+  { value: "context", label: "Buying context" },
+  { value: "reliability", label: "Reliability" },
+  { value: "specialty", label: "Specialty vehicles" },
+  { value: "compliance", label: "Compliance & paperwork" },
+  { value: "comparison", label: "Comparison shopping" },
+  { value: "confidence", label: "Buyer confidence" },
+  { value: "channel", label: "Buying channel" },
+  { value: "platform", label: "Platforms & listings" },
+  { value: "post-purchase", label: "After purchase" },
+  { value: "safety", label: "Safety" },
 ];
 
 export default function ShareSituationPage() {
@@ -27,12 +37,12 @@ export default function ShareSituationPage() {
   }
 
   return (
-    <main className="page-shell share-situation-page">
+    <main className="page-shell share-situation-page autobuy-share-page">
       <Helmet>
-        <title>Share your repair situation | HomeFixScope</title>
+        <title>Share your car-buying situation | AutoBuyScope</title>
         <meta
           name="description"
-          content="Share the repair problem, quote, urgency, and home-system decision you are trying to sort through."
+          content="Share the vehicle, price, seller, inspection concern, financing issue, timing pressure, or car-buying decision you are trying to sort through."
         />
       </Helmet>
 
@@ -40,35 +50,36 @@ export default function ShareSituationPage() {
         <Header />
 
         <section className="share-situation-hero">
-          <div className="section-label">Share your repair situation</div>
+          <div className="section-label">Share your car-buying situation</div>
 
-          <h1>Tell us what broke and what you&apos;re trying to decide.</h1>
+          <h1>Tell us what you&apos;re deciding before you buy.</h1>
 
           <p>
-            HomeFixScope is building clearer repair decision guides for leaks,
-            roofs, HVAC, plumbing, electrical, and structural problems. Share
-            what happened, what quote you got, what feels unclear, and how urgent
-            it seems.
+            AutoBuyScope is building clearer decision guides for used cars,
+            financing, timing, negotiation, seller risk, reliability, paperwork,
+            safety, and when to walk away. Share the vehicle, price, seller
+            situation, and what feels unclear.
           </p>
         </section>
 
         {submitted ? (
           <section className="share-situation-success">
             <div className="section-label">Received</div>
-            <h2>Thanks — this helps shape HomeFixScope.</h2>
+            <h2>Thanks — this helps shape AutoBuyScope.</h2>
             <p>
-              We cannot give individual legal, engineering, contractor, or
-              professional advice, but real repair situations help us build
-              clearer examples, checklists, and decision guides.
+              We cannot give individual legal, financial, insurance, mechanical,
+              dealer, lender, or professional advice, but real car-buying
+              situations help us build clearer examples, checklists, and
+              decision guides.
             </p>
           </section>
         ) : (
           <form className="share-situation-form" onSubmit={handleSubmit}>
             <label>
-              <span>Repair area</span>
+              <span>Buying area</span>
               <select name="vertical" defaultValue={initialVertical}>
                 <option value="">Choose one</option>
-                {REPAIR_AREAS.map((area) => (
+                {BUYING_AREAS.map((area) => (
                   <option key={area.value} value={area.value}>
                     {area.label}
                   </option>
@@ -77,11 +88,19 @@ export default function ShareSituationPage() {
             </label>
 
             <label>
-              <span>What happened?</span>
+              <span>Vehicle, optional</span>
+              <input
+                name="vehicle"
+                placeholder="Example: 2018 Toyota Camry / used EV / rebuilt-title SUV"
+              />
+            </label>
+
+            <label>
+              <span>What is the buying situation?</span>
               <textarea
                 name="situation"
                 rows="5"
-                placeholder="Example: A ceiling stain keeps growing after rain, and I am not sure if the leak is from the roof, flashing, or plumbing."
+                placeholder="Example: The seller says the car is clean, but the service history is thin and the price is lower than similar listings."
               />
             </label>
 
@@ -90,46 +109,58 @@ export default function ShareSituationPage() {
               <textarea
                 name="decision_question"
                 rows="4"
-                placeholder="Example: I am trying to decide whether to patch it now, get another quote, open the ceiling, or wait until the next storm."
+                placeholder="Example: I am trying to decide whether to buy it, get an inspection, negotiate harder, wait, or walk away."
               />
             </label>
 
             <label>
-              <span>DIY or contractor?</span>
-              <select name="repair_path" defaultValue="">
+              <span>Seller or channel</span>
+              <select name="seller_channel" defaultValue="">
                 <option value="">Choose one</option>
-                <option value="diy">I am considering DIY</option>
-                <option value="contractor">I have talked to a contractor</option>
-                <option value="both">I am comparing DIY vs hiring someone</option>
+                <option value="dealer">Dealer</option>
+                <option value="private_seller">Private seller</option>
+                <option value="marketplace">Marketplace listing</option>
+                <option value="online_retailer">Online retailer</option>
+                <option value="auction">Auction or wholesale</option>
+                <option value="friend_family">Friend, family, or known seller</option>
                 <option value="unsure">Not sure yet</option>
               </select>
             </label>
 
             <label>
-              <span>Approximate quote or cost, optional</span>
+              <span>Price, payment, or quote, optional</span>
               <input
                 name="approximate_amount"
-                placeholder="Example: $850 repair quote / $6,500 replacement quote"
+                placeholder="Example: $18,500 asking price / $420 monthly payment / $2,000 trade-in"
               />
             </label>
 
             <label>
-              <span>Urgency</span>
-              <select name="urgency" defaultValue="">
+              <span>Main concern</span>
+              <select name="main_concern" defaultValue="">
                 <option value="">Choose one</option>
-                <option value="active_problem">Active problem right now</option>
-                <option value="soon">Needs attention soon</option>
-                <option value="planning">Planning ahead</option>
-                <option value="unsure">Not sure how urgent it is</option>
+                <option value="condition">Condition or inspection risk</option>
+                <option value="price">Price or value</option>
+                <option value="financing">Financing or monthly payment</option>
+                <option value="paperwork">Title, registration, or paperwork</option>
+                <option value="seller_pressure">Seller pressure or urgency</option>
+                <option value="fit">Whether the vehicle fits my needs</option>
+                <option value="reliability">Reliability or future repairs</option>
+                <option value="safety">Safety</option>
+                <option value="unsure">Not sure</option>
               </select>
             </label>
 
             <label>
-              <span>Home or system age, optional</span>
-              <input
-                name="home_or_system_age"
-                placeholder="Example: 18-year-old HVAC system / 1960s house / 12-year-old roof"
-              />
+              <span>Timing</span>
+              <select name="timing" defaultValue="">
+                <option value="">Choose one</option>
+                <option value="urgent">I need a vehicle soon</option>
+                <option value="active_deal">I am deciding on an active deal</option>
+                <option value="shopping">I am still shopping</option>
+                <option value="planning">Planning ahead</option>
+                <option value="unsure">Not sure</option>
+              </select>
             </label>
 
             <label>
@@ -137,14 +168,14 @@ export default function ShareSituationPage() {
               <input name="email" type="email" placeholder="you@example.com" />
             </label>
 
-            <button type="submit">Submit repair situation</button>
+            <button type="submit">Submit car-buying situation</button>
           </form>
         )}
 
         <p className="share-situation-disclaimer">
-          HomeFixScope does not provide legal, engineering, contractor, code, or
-          emergency advice. Submissions may be used to improve future examples,
-          checklists, and repair decision guides.
+          AutoBuyScope does not provide legal, financial, insurance, mechanical,
+          dealer, lender, tax, or professional advice. Submissions may be used to
+          improve future examples, checklists, and car-buying decision guides.
         </p>
       </div>
     </main>

@@ -1,0 +1,133 @@
+.auto-buy-signal {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(132, 177, 205, 0.2);
+  border-radius: 22px;
+  padding: 18px;
+  background:
+    radial-gradient(circle at 72% 18%, rgba(66, 229, 223, 0.12), transparent 9rem),
+    linear-gradient(180deg, rgba(10, 24, 34, 0.86), rgba(6, 15, 24, 0.94));
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.025),
+    0 18px 40px rgba(0, 0, 0, 0.22);
+}
+
+.auto-buy-signal::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border-radius: 18px;
+  background-image:
+    linear-gradient(rgba(132, 177, 205, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(132, 177, 205, 0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.auto-buy-signal > * {
+  position: relative;
+  z-index: 1;
+}
+
+.auto-buy-signal__top,
+.auto-buy-signal__row,
+.auto-buy-signal__move {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.auto-buy-signal__top {
+  color: rgba(221, 231, 236, 0.72);
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.auto-buy-signal__status {
+  color: #42e5df;
+}
+
+.auto-buy-signal__dial {
+  position: relative;
+  height: 74px;
+  margin: 18px 0 10px;
+  border-bottom: 1px solid rgba(132, 177, 205, 0.18);
+}
+
+.auto-buy-signal__dial::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -1px;
+  width: 140px;
+  height: 70px;
+  transform: translateX(-50%);
+  border: 1px solid rgba(111, 183, 255, 0.28);
+  border-bottom: 0;
+  border-radius: 140px 140px 0 0;
+}
+
+.auto-buy-signal__dial span {
+  position: absolute;
+  bottom: 14px;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #42e5df;
+  box-shadow: 0 0 20px rgba(66, 229, 223, 0.28);
+}
+
+.auto-buy-signal__dial span:nth-child(1) {
+  left: 30%;
+}
+
+.auto-buy-signal__dial span:nth-child(2) {
+  left: 50%;
+}
+
+.auto-buy-signal__dial span:nth-child(3) {
+  left: 68%;
+}
+
+.auto-buy-signal__rows {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.auto-buy-signal__row {
+  min-height: 34px;
+  padding: 0 10px;
+  border-radius: 10px;
+  background: rgba(132, 177, 205, 0.065);
+  color: rgba(221, 231, 236, 0.62);
+  font-size: 0.88rem;
+}
+
+.auto-buy-signal__row strong {
+  color: rgba(245, 248, 250, 0.92);
+  font-size: 0.86rem;
+}
+
+.auto-buy-signal__move {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(132, 177, 205, 0.16);
+  color: rgba(221, 231, 236, 0.62);
+  font-size: 0.82rem;
+}
+
+.auto-buy-signal__move strong {
+  color: #8ed0ff;
+  text-align: right;
+}
+
+@media (max-width: 760px) {
+  .auto-buy-signal {
+    display: none;
+  }
+}

@@ -2,7 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import fs from "node:fs/promises";
 import path from "node:path";
 
-const SITE_URL = "https://homefixscope.com";
+const SITE_URL = "https://autobuyscope.com";
 
 const SUPABASE_URL =
   process.env.VITE_SUPABASE_URL ||
@@ -14,7 +14,24 @@ const SUPABASE_ANON_KEY =
   process.env.SUPABASE_ANON_KEY ||
   "sb_publishable_qeHpjmBA_STovuCQL-fjDQ_U5eOEoy-";
 
-const VERTICALS = ["plumbing", "electrical", "leak", "foundation", "roofing", "hvac"];
+const AUTOBUY_VERTICALS = [
+  "used",
+  "money",
+  "timing",
+  "use-fit",
+  "red-flags",
+  "negotiation",
+  "context",
+  "reliability",
+  "specialty",
+  "compliance",
+  "comparison",
+  "confidence",
+  "channel",
+  "platform",
+  "post-purchase",
+  "safety",
+];
 
 if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
   throw new Error("Missing Supabase env vars.");
@@ -43,16 +60,57 @@ function buildUrlTag(loc, lastmod) {
 }
 
 function getDomainSlug(branchKey = "") {
-  return String(branchKey).split("_")[0] || "";
+  const key = String(branchKey || "");
+
+  if (key.startsWith("autobuy_core_used_") || key === "autobuy_core_used") {
+    return "used";
+  }
+
+  const match = key.match(/^autobuy_([^_]+)/);
+  const raw = match?.[1] || "";
+
+  const aliases = {
+    usefit: "use-fit",
+    redflags: "red-flags",
+    postpurchase: "post-purchase",
+  };
+
+  return aliases[raw] || raw;
+}
+
+function getBranchPrefixForDomain(domainSlug = "") {
+  const prefixes = {
+    used: "autobuy_core_used",
+    money: "autobuy_money",
+    timing: "autobuy_timing",
+    "use-fit": "autobuy_usefit",
+    "red-flags": "autobuy_redflags",
+    negotiation: "autobuy_negotiation",
+    context: "autobuy_context",
+    reliability: "autobuy_reliability",
+    specialty: "autobuy_specialty",
+    compliance: "autobuy_compliance",
+    comparison: "autobuy_comparison",
+    confidence: "autobuy_confidence",
+    channel: "autobuy_channel",
+    platform: "autobuy_platform",
+    "post-purchase": "autobuy_postpurchase",
+    safety: "autobuy_safety",
+  };
+
+  return prefixes[domainSlug] || `autobuy_${String(domainSlug).replace(/-/g, "_")}`;
 }
 
 function getFamilySlug(branchKey = "") {
-  const parts = String(branchKey).split("_");
-  parts.shift();
-  return parts.join("-");
+  const domainSlug = getDomainSlug(branchKey);
+  const prefix = getBranchPrefixForDomain(domainSlug);
+
+  return String(branchKey || "")
+    .replace(new RegExp(`^${prefix}_?`), "")
+    .replace(/_/g, "-");
 }
 
-async function fetchAllHomeFixRows() {
+async function fetchAllAutoBuyRows() {
   const pageSize = 1000;
   let from = 0;
   let allRows = [];
@@ -62,6 +120,7 @@ async function fetchAllHomeFixRows() {
       .from("branch_seed_overview")
       .select("branch_key, slug, page_status, published_at")
       .eq("page_status", "published")
+      .ilike("branch_key", "autobuy_%")
       .range(from, from + pageSize - 1);
 
     if (error) throw error;
@@ -75,7 +134,7 @@ async function fetchAllHomeFixRows() {
 
   return allRows.filter((row) => {
     const domainSlug = getDomainSlug(row.branch_key);
-    return VERTICALS.includes(domainSlug);
+    return AUTOBUY_VERTICALS.includes(domainSlug);
   });
 }
 
@@ -92,19 +151,19 @@ async function main() {
     lastmod: null,
   });
 
-  for (const vertical of VERTICALS) {
+  for (const vertical of AUTOBUY_VERTICALS) {
     const loc = `${SITE_URL}/${vertical}`;
     urls.set(loc, { loc, lastmod: null });
   }
 
-  const rows = await fetchAllHomeFixRows();
+  const rows = await fetchAllAutoBuyRows();
 
   for (const row of rows) {
     const branchKey = row.branch_key || "";
     const domainSlug = getDomainSlug(branchKey);
     const familySlug = getFamilySlug(branchKey);
 
-    if (!VERTICALS.includes(domainSlug)) continue;
+    if (!AUTOBUY_VERTICALS.includes(domainSlug)) continue;
 
     if (familySlug) {
       const clusterLoc = `${SITE_URL}/${domainSlug}/${familySlug}`;

@@ -1,7 +1,7 @@
 import SectionRule from "../components/SectionRule";
 
 export default function DecisionException({ exception }) {
-  const title = exception?.title || "When to call a pro";
+  const title = exception?.title || "When this can still make sense";
   const body = exception?.body;
 
   if (!body) return null;

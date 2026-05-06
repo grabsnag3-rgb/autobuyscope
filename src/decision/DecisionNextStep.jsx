@@ -7,8 +7,8 @@ export default function DecisionNextStep({ nextStep }) {
   if (!body) return null;
 
   return (
-    <section className="decision-guidance decision-next-step">
-      <SectionRule label="Next step" />
+    <section className="decision-guidance decision-next-move">
+      <SectionRule label="Next move" />
 
       <article className="decision-guidance__card">
         <h2 className="decision-guidance__title">{title}</h2>

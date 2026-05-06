@@ -4,7 +4,7 @@ export default function Header() {
   return (
     <header className="site-header">
       <Link to="/" className="site-header__home">
-        homefixscope
+        autobuyscope
       </Link>
     </header>
   );

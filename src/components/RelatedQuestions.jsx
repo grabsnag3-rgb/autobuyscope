@@ -28,7 +28,7 @@ export default function RelatedQuestions({ items = [] }) {
     <section className="related-questions" aria-labelledby="related-questions-heading">
       <div className="related-questions__head">
         <p id="related-questions-heading" className="related-questions__eyebrow">
-          Related repair questions
+          Related car-buying questions
         </p>
       </div>
 

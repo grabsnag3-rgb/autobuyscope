@@ -1,21 +1,22 @@
-import InsetPlane from "../components/InsetPlane";
+import ExpandableText from "../components/ExpandableText";
 
 export default function DecisionBottomLine({ bottomLine }) {
-  const text =
-    bottomLine ||
-    "Use the visible problem, safety risk, damage spread, system age, and quote scope to decide whether to fix it now, wait, DIY it, hire a pro, or get another opinion.";
+  if (!bottomLine) return null;
 
   return (
-    <section className="decision-bottom-line" aria-labelledby="decision-bottom-line">
-      <InsetPlane>
-        <div className="decision-bottom-line__inner">
-          <p id="decision-bottom-line" className="decision-bottom-line__eyebrow">
-            Bottom line
-          </p>
+    <section className="decision-bottom-line">
+      <div className="decision-bottom-line__inner">
+        <p className="decision-bottom-line__eyebrow">Bottom line</p>
 
-          <p className="decision-bottom-line__text">{text}</p>
-        </div>
-      </InsetPlane>
+        <ExpandableText
+          collapsedLines={7}
+          className="decision-bottom-line__text"
+          expandLabel="Read full bottom line"
+          collapseLabel="Collapse"
+        >
+          {bottomLine}
+        </ExpandableText>
+      </div>
     </section>
   );
 }

@@ -1,11 +1,9 @@
 import { titleFromSlug } from "../lib/routeHelpers";
-import { getDomainConfig } from "../lib/domainConfig";
-
-function familySlugFromBranchKey(branchKey = "", domainSlug = "") {
-  return String(branchKey)
-    .replace(new RegExp(`^${domainSlug}_`), "")
-    .replace(/_/g, "-");
-}
+import {
+  getDomainConfig,
+  getAutoBuyDomainFromBranchKey,
+  getAutoBuyFamilySlugFromBranchKey,
+} from "../lib/domainConfig";
 
 function normalizeFactor(factor = {}) {
   if (typeof factor === "string") {
@@ -21,19 +19,32 @@ function normalizeFactor(factor = {}) {
   };
 }
 
+function normalizeRelatedQuestion(item) {
+  if (typeof item === "string") {
+    return {
+      title: item,
+      slug: "",
+    };
+  }
+
+  return {
+    title: item?.title ?? item?.question ?? "",
+    slug: item?.slug ?? "",
+  };
+}
+
 function buildMatrix(payload = {}) {
   const branchKey = payload?.branch_key || "";
-  const fallbackDomainSlug = "home-repair";
-  const domainSlug = branchKey.includes("_")
-    ? branchKey.split("_")[0]
-    : fallbackDomainSlug;
+  const domainSlug = branchKey
+    ? getAutoBuyDomainFromBranchKey(branchKey)
+    : "used";
 
   const domainConfig = getDomainConfig(domainSlug);
   const domainLabel = domainConfig.label || titleFromSlug(domainSlug);
 
   const familySlug = branchKey
-    ? familySlugFromBranchKey(branchKey, domainSlug)
-    : "repair-decisions";
+    ? getAutoBuyFamilySlugFromBranchKey(branchKey)
+    : "car-buying-decisions";
 
   const familyLabel = titleFromSlug(familySlug);
 
@@ -84,14 +95,7 @@ export function mapDecisionPayload(payload = {}) {
       body: payload?.exception?.body ?? "",
     },
     relatedQuestions: Array.isArray(payload?.related_questions)
-      ? payload.related_questions.map((item) =>
-          typeof item === "string"
-            ? { title: item, slug: "" }
-            : {
-                title: item?.title ?? item?.question ?? "",
-                slug: item?.slug ?? "",
-              }
-        )
+      ? payload.related_questions.map(normalizeRelatedQuestion)
       : [],
     matrix: buildMatrix(payload),
     branch_key: payload?.branch_key ?? "",
